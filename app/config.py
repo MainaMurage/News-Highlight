@@ -2,7 +2,7 @@ class Config :
   '''
   General configuration parent class 
   '''
-  pass # denote null block of code 
+  NEWS_HIGHLIGHT_API_BASE_URL = 'https://newsapi.org/v2/sources?apiKey={}' 
 
 
 class ProdConfig(Config) :
