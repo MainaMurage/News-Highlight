@@ -1,3 +1,5 @@
 {
-  "python.pythonPath": "virtual/bin/python3.6"
+  "python.pythonPath": "virtual/bin/python3.6",
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 72
 }
