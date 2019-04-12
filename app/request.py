@@ -10,7 +10,7 @@ Source = source.Source
 api_key =app.config['NEWS_HIGHLIGHT_API_KEY']
 
 #get the source base url
-base_url = app.config["NEWS_HIGHLIGHT_BASE_URL"]
+base_url = app.config["NEWS_HIGHLIGHT_API_BASE_URL"]
 
 def get_sources() :
   '''
@@ -24,8 +24,8 @@ def get_sources() :
 
     source_results =  None 
 
-    if get_sources_response['results'] :
-      source_results_list = get_sources_response['results']
+    if get_sources_response['sources'] :
+      source_results_list = get_sources_response['sources']
       source_results = process_results(source_results_list)
 
   return source_results 
