@@ -9,13 +9,13 @@
   {% else %}
   <title>News Highlight</title>
   {% endif %}
+{% import 'macros.html' as macro%}
+
 </head>
 <body>
   <h1>Sources</h1>
   <ul>
-    {% for source in sources %}
-    <p><a href="{{ source.url }}">{{ source.url }}</a></p> 
-    {% endfor %}
+    {{ macro.displaySourceList(sources) }}
   </ul>
 </body>
 </html>
