@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app 
-from .request import get_sources
+from .request import get_sources,get_top_headlines
 
 #create a route decorator
 @app.route('/')
@@ -16,10 +16,15 @@ def index() :
   title = 'Home - Welcome to the best movie review website online '
   return render_template('index.html', title = title, sources = sources)
 
-@app.route('/movie/<int:movie_id>')
-def movie(movie_id) :
+@app.route('/source/<source>')
+def Top_Headlines(source) :
   '''
-  view movie page function that returns the movie details page and its data 
+  view Top_Headlines page function that returns the Top_Headlines from a source details page and its data 
   '''
-  return render_template('movie.html', id = movie_id)
+  
+  Top_headlines = get_top_headlines(source)
+  print(Top_headlines)
+
+  return render_template('Top_headlines.html', Top_headlines = Top_headlines)
+  
   

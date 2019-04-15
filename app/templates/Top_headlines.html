@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    {% for Top_headline in Top_headlines %}
+    {% if Top_headline.urlToImage%}
+
+  <ul>
+    <p><img src="{{ Top_headline.urlToImage}}" class="card-img img-responsive" alt="News-Image"></p>
+    <p>{{ Top_headline.title}}</p>
+    <p>{{ Top_headline.description}}</p>
+    <p>{{ Top_headline.publishedAt }}</p>
+    <p>{{ Top_headline.author }}</p>
+  </ul>
+
+  {% endif %}
+  {% endfor %}
+  
+</div>
+
+{% endblock %}

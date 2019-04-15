@@ -60,22 +60,31 @@ def get_top_headlines(source) :
     top_headlines_data = url.read()
     top_headlines_response = json.loads(top_headlines_data)
 
-    top_headlines_object = None 
+    top_headlines_results = None 
 
     if top_headlines_response['articles'] :
-      author = top_headlines_response.get('author')
-      title = top_headlines_response.get('title')
-      description = top_headlines_response.get('description')
-      url = top_headlines_response.get('url')
-      urlToImage = top_headlines_response.get('urlToImage')
-      publishedAt = top_headlines_response.get('publishedAt')
-      content = top_headlines_response.get('content')
+      top_headlines_results_list = top_headlines_response['articles']
+      top_headlines_results = process_top_headlines_results(top_headlines_results_list)
 
-      top_headlines_object = Top_Headlines(author, title, description, url, urlToImage, publishedAt, content) 
+  return(top_headlines_results)
 
-    return(top_headlines_object)
-  
+def process_top_headlines_results(top_headlines_results_list) :
+  '''
+  process Top_headlines results and transform them to a list of objects
+  '''
+  top_headlines_results = []
+  for top_headlines_item in top_headlines_results_list :
 
+    author = top_headlines_item.get('author')
+    title = top_headlines_item.get('title')
+    description = top_headlines_item.get('description')
+    url = top_headlines_item.get('url')
+    urlToImage = top_headlines_item.get('urlToImage')
+    publishedAt = top_headlines_item.get('publishedAt')
+    content = top_headlines_item.get('content')
 
+    top_headlines_object = Top_Headlines(author, title, description, url, urlToImage, publishedAt, content)
+    top_headlines_results.append(top_headlines_object)
 
+  return top_headlines_results
 
