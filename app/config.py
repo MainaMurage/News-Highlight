@@ -4,6 +4,7 @@ class Config :
   '''
   NEWS_HIGHLIGHT_API_BASE_URL = 'https://newsapi.org/v2/sources?apiKey={}'
   TOP_HEADLINES_URL = 'https://newsapi.org/v2/top-headlines?sources={}&apikey={}' 
+  EVERYTHING_URL = 'https://newsapi.org/v2/everything?q=trending&language=en&apiKey={}'
 
 
 class ProdConfig(Config) :

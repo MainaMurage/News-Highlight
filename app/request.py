@@ -2,10 +2,11 @@ from app import app
 #import the module that will help create a connection to the API URL and send a request
 #import json modules that will format the JSON response to a dict
 import urllib.request, json
-from .models import source,top_headlines
+from .models import source,top_headlines,everything
 
 Source = source.Source
 Top_Headlines = top_headlines.Top_Headlines
+Everything = everything.Everything
 
 #get the api key
 api_key =app.config['NEWS_HIGHLIGHT_API_KEY']
@@ -15,6 +16,9 @@ base_url = app.config["NEWS_HIGHLIGHT_API_BASE_URL"]
 
 #get the top headlines url
 headlines_url = app.config["TOP_HEADLINES_URL"]
+
+#get everything url
+everything_url = app.config['EVERYTHING_URL']
 
 def get_sources() :
   '''
@@ -88,3 +92,40 @@ def process_top_headlines_results(top_headlines_results_list) :
 
   return top_headlines_results
 
+def get_everything() :
+  '''
+  get the json response to our url request 
+  '''
+  get_everything_url = everything_url.format(api_key)
+
+  with urllib.request.urlopen(get_everything_url) as url :
+    get_everything_data = url.read()
+    get_everything_response = json.loads(get_everything_data)
+
+    everything_results =  None 
+
+    if get_everything_response['articles'] :
+      everything_results_list = get_everything_response['articles']
+      everything_results = process_everything_results(everything_results_list)
+
+  return everything_results 
+
+def process_everything_results(everything_results_list) :
+  '''
+  process everything result and transform them to a list of objects
+  '''
+  everything_results = []
+  for everything_item in everything_results_list :
+
+    author = everything_item.get('author')
+    title = everything_item.get('title')
+    description = everything_item.get('description')
+    url = everything_item.get('url')
+    urlToImage = everything_item.get('urlToImage')
+    publishedAt = everything_item.get('publishedAt')
+    content = everything_item.get('content')
+
+    everything_object = Everything(author, title, description, url, urlToImage, publishedAt, content)
+    everything_results.append(everything_object)
+
+  return everything_results
