@@ -1,25 +1,30 @@
-from app import app 
 #import the module that will help create a connection to the API URL and send a request
 #import json modules that will format the JSON response to a dict
 import urllib.request, json
-from .models import source,top_headlines,everything
+from .models import Source,Top_Headlines,Everything
 
-Source = source.Source
-Top_Headlines = top_headlines.Top_Headlines
-Everything = everything.Everything
+
 
 #get the api key
-api_key =app.config['NEWS_HIGHLIGHT_API_KEY']
+api_key = None
 
 #get the source base url
-base_url = app.config["NEWS_HIGHLIGHT_API_BASE_URL"]
+base_url = None
 
 #get the top headlines url
-headlines_url = app.config["TOP_HEADLINES_URL"]
+headlines_url = None
 
 #get everything url
-everything_url = app.config['EVERYTHING_URL']
+everything_url = None
 
+def configure_request(app) :
+  global api_key, base_url, headlines_url, everything_url
+  api_key =app.config['NEWS_HIGHLIGHT_API_KEY']
+  base_url = app.config["NEWS_HIGHLIGHT_API_BASE_URL"]
+  headlines_url = app.config["TOP_HEADLINES_URL"]
+  everything_url = app.config['EVERYTHING_URL']
+
+  
 def get_sources() :
   '''
   get the json response to our url request 
