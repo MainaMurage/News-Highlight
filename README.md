@@ -27,7 +27,7 @@ This is an online news platform that provides a list of global news sources and 
 * On your terminal run
  ```./start.py```
 * Access the live site using the local host provided
-* Or access the live website by clicking on this url https://news-highlights.herokuapp.com/
+* Or access the live website by clicking on this url https://news-highlight-murage.herokuapp.com/
 
 ## Known Bugs
 
